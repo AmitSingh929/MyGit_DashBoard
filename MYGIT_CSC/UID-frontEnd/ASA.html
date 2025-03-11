@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UID Dashboard </title>
+    <link href='https://fonts.googleapis.com/css?family=Public Sans' rel='stylesheet'>
+    <link rel="stylesheet" href="assests/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assests/img/csc.png" alt="Logo" id="sidebar-logo">
+            <button class="toggle-btn" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div class="menu">
+
+            <a href="ASA.html" class="active"><i class="fas fa-wallet"></i><span> ASA Dashboard</span></a>
+            <a href="AUA.html"><i class="fas fa-user-shield"></i><span> AUA Dashboard</span></a>
+            <a href="CIDR.html"><i class="fas fa-database"></i><span> CIDR Dashboard</span></a>
+            
+
+    </nav>
+
+    <!-- Main Content -->
+    <main class="content" id="content">
+        <div class="header-wrapper">
+            <button class="btn d-md-none" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                id="dropdownToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+
+
+            <!-- Dropdown Menu -->
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="ASA.html"><i class="fas fa-wallet mx-4"></i><span>ASA
+                            Dashboard</span></a></li>
+                <li><a class="dropdown-item" href="AUA.html"><i class="fas fa-user-shield mx-4"></i><span>AUA
+                            Dashboard</span></a></li>
+                <li><a class="dropdown-item" href="CIDR.html"><i class="fas fa-database mx-4"></i><span>CIDR
+                            Dashboard</span></a></li>
+            </ul>
+
+
+            <div class="title">
+                <span id="dashboard-title">ASA Dashboard</span>
+                <img src="assests/img/csc.png" alt="Logo" id="header-logo" class="logo">
+                <!-- <span class="client-id-box"> Client ID: 120001</span> -->
+                <span class="client-id-box"> Client ID: <span id="client-id-display">120001</span></span>
+            </div>
+            <div class="nav-links">
+
+
+                <!-- <a href="#">Profile</a>
+                <a href="#">Settings</a> -->
+                <a href="#" class="logout-link text-danger">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- Filter Section -->
+        <div class="row mt-4 filter-section">
+            <div class="col-md-3 col-sm-6 mb-3">
+                <label for="ClientID" class="form-label fw-bold">Client ID</label>
+                <!-- <input type="text" class="form-control" id="ClientID" placeholder="1200011"> -->
+                <select id="ClientID" class="form-select" size="1">
+                    <option value="AUA-CHP">AUA-CHP</option>
+                    <option value="AUA-DFT">AUA-DFT</option>
+                    <option value="AUA-DHP">AUA-DHP</option>
+                    <option value="AUA-DJH">AUA-DJH</option>
+                    <option value="AUA-DLT">AUA-DLT</option>
+                    <option value="AUA-EPF">AUA-EPF</option>
+                    <option value="AUA-MEA">AUA-MEA</option>
+                    <option value="AUA-MOK">AUA-MOK</option>
+                    <option value="AUA-PFS">AUA-PFS</option>
+                    <option value="AUA-UCO">AUA-UCO</option>
+                    <option value="AUA-WBT">AUA-WBT</option>
+                    <option value="CSC-AAP">CSC-AAP</option>
+                    <option value="CSC-AUA">CSC-AUA</option>
+                    <option value="CSC-AYP">CSC-AYP</option>
+                    <option value="CSC-CBL">CSC-CBL</option>
+                    <option value="CSC-CCI">CSC-CCI</option>
+                    <option value="CSC-CSP">CSC-CSP</option>
+                    <option value="CSC-DGP">CSC-DGP</option>
+                    <option value="CSC-DVJ">CSC-DVJ</option>
+                    <option value="CSC-HLT">CSC-HLT</option>
+                    <option value="CSC-LCT">CSC-LCT</option>
+                    <option value="CSC-NHA">CSC-NHA</option>
+                    <option value="CSC-NSP">CSC-NSP</option>
+                    <option value="CSC-PSY">CSC-PSY</option>
+                    <option value="CSC-REG">CSC-REG</option>
+                    <option value="CSC-RRB">CSC-RRB</option>
+                    <option value="CSC-SER">CSC-SER</option>
+                    <option value="CSC-UNI">CSC-UNI</option>
+                    <option value="CSC-VSP">CSC-VSP</option>
+                    <option value="CSC-YJM">CSC-YJM</option>
+                    <option value="SUA-ECH">SUA-ECH</option>
+                    <option value="SUA-NSP">SUA-NSP</option>
+                </select>
+
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3">
+                <label for="start-date" class="form-label fw-bold">Start Date</label>
+                <input type="date" class="form-control custom-datepicker" id="start-date" />
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3">
+                <label for="end-date" class="form-label fw-bold">End Date</label>
+                <input type="date" class="form-control custom-datepicker" id="end-date" />
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3 d-flex align-items-end">
+                <button class="btn login-btn text-white btn-height w-100 py-2">
+                    <strong>Filter</strong>
+                </button>
+            </div>
+        </div>
+
+
+        <!-- Cards Section -->
+        <div class="row mb-4 filter-section">
+            <div class="col-md-3 col-sm-6">
+                <div class="card welcome-card text-white text-center">
+                    <h5>Hello, Admin</h5>
+                    <p> Welcome back to UID Dashboard </p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="card text-center p-4 stats-card request-card" onclick="ASAdetailPage('request')">
+                    <h6>ASA</h6>
+                    <p class="cursor-pointer"><strong>0</strong></p>
+                    <span class="text-primary">Request</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="card text-center p-4 stats-card success-card" onclick="ASAdetailPage('success')">
+                    <h6>ASA</h6>
+                    <p class="cursor-pointer"><strong>0</strong></p>
+                    <span class="text-success">Success</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="card text-center p-4 stats-card fail-card" onclick="ASAdetailPage('failure')">
+                    <h6>ASA</h6>
+                    <p class="cursor-pointer"><strong>0</strong></p>
+                    <span class="text-danger">Fail</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer text-center">
+        <p>&copy; 2025 CSC E-Governance. All rights reserved.</p>
+    </footer>
+
+
+    <script src="assests/js/bootstrap.bundle.min.js"></script>
+    <script src="assests/js/script.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+            // Retrieve elements
+            const clientIdInput = document.getElementById("ClientID");
+            const clientIdDisplay = document.getElementById("client-id-display");
+            const startDateInput = document.getElementById("start-date");
+            const endDateInput = document.getElementById("end-date");
+            const filterBtn = document.querySelector(".btn.login-btn");
+
+            // Get today's date and 10 days before today
+            const today = new Date();
+            const tenDaysAgo = new Date();
+            tenDaysAgo.setDate(today.getDate() - 10);
+
+            // Format dates as YYYY-MM-DD
+            const formatDate = (date) => date.toISOString().split("T")[0];
+
+            const defaultClientId = "CSC-REG";
+            const defaultStartDate = formatDate(tenDaysAgo);
+            const defaultEndDate = formatDate(today);
+
+            // Restore saved values or set defaults
+            clientIdInput.value = sessionStorage.getItem("clientId") || defaultClientId;
+            startDateInput.value = sessionStorage.getItem("startDate") || defaultStartDate;
+            endDateInput.value = sessionStorage.getItem("endDate") || defaultEndDate;
+            clientIdDisplay.textContent = clientIdInput.value;
+
+            // Function to fetch data from API
+            function fetchData(clientId, startDate, endDate) {
+                // Save values to sessionStorage
+                sessionStorage.setItem("clientId", clientId);
+                sessionStorage.setItem("startDate", startDate);
+                sessionStorage.setItem("endDate", endDate);
+
+                // Generate unique timestamp to prevent caching
+                const timestamp = new Date().getTime();
+
+                // API URL with parameters
+                const apiUrl = `http://localhost:8086/asa/counts?clientId=${clientId}&startDate=${startDate}&endDate=${endDate}&page=0&size=100&_=${timestamp}`;
+
+                // Fetch data from API
+                fetch(apiUrl, { cache: "no-cache" }) // Force fresh request
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data) {
+                            // Update UI with new data
+                            document.querySelector(".request-card p strong").textContent = data.requestCount ?? "N/A";
+                            document.querySelector(".success-card p strong").textContent = data.successResponseCount ?? "N/A";
+                            document.querySelector(".fail-card p strong").textContent = data.failureResponseCount ?? "N/A";
+
+                            // Save API response to sessionStorage
+                            sessionStorage.setItem("auaCounts", JSON.stringify(data));
+                        } else {
+                            console.error("Error: Data is empty or missing fields.");
+                            alert("No data found for the given inputs.");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error fetching ASA counts:", error);
+                        alert("Failed to fetch data. Please try again later.");
+                    });
+            }
+
+            // Fetch data on page load using default values
+            fetchData(clientIdInput.value, startDateInput.value, endDateInput.value);
+
+            // Handle filter button click event
+            filterBtn.addEventListener("click", function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Get user input values
+                const clientId = clientIdInput.value.trim();
+                const startDate = startDateInput.value;
+                const endDate = endDateInput.value;
+
+                // Validate input
+                if (!clientId || !startDate || !endDate) {
+                    alert("Please enter Client ID, Start Date, and End Date.");
+                    return;
+                }
+
+                // Fetch data with user-selected values
+                fetchData(clientId, startDate, endDate);
+            });
+
+            // Restore saved API data if available
+            const savedCounts = JSON.parse(sessionStorage.getItem("auaCounts"));
+            if (savedCounts) {
+                document.querySelector(".request-card p strong").textContent = savedCounts.requestCount ?? "0";
+                document.querySelector(".success-card p strong").textContent = savedCounts.successResponseCount ?? "0";
+                document.querySelector(".fail-card p strong").textContent = savedCounts.failureResponseCount ?? "0";
+            }
+
+            clientIdInput.addEventListener("change", function () {
+                clientIdDisplay.textContent = clientIdInput.value;  // Update the displayed Client ID
+                fetchData(clientIdInput.value, startDateInput.value, endDateInput.value); // Fetch data automatically
+            });
+        });
+</script>
+
+</body>

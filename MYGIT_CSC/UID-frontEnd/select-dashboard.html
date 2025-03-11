@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UID Dashboard</title>
+  <link href='https://fonts.googleapis.com/css?family=Public Sans' rel='stylesheet'>
+  <link href="assests/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assests/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-logo">
+      <img src="assests/img/csc.png" alt="Logo">
+    </div>
+    <a href="#" class="logout-link text-danger">
+      <i class="fas fa-sign-out-alt"></i> Logout
+    </a>
+  </header>
+
+  <!-- Welcome Message -->
+  <div class="welcome-message">
+    <i class="fas fa-hand-paper"></i> Welcome, Admin!
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-container">
+    <div class="form-container">
+      <div class="form-title">Select Your Request Type</div>
+      <div class="option-group">
+        <!-- ASA Option -->
+        <div class="option-card" id="option1" onclick="selectOption('option1')">
+          <i class="fas fa-building option-icon"></i>
+          <div class="option-title">ASA Request</div>
+          <div class="option-description">Submit an ASA (Authentication Service Agency) request for secure
+            authentication services.</div>
+        </div>
+        <!-- AUA Option -->
+        <div class="option-card" id="option2" onclick="selectOption('option2')">
+          <i class="fas fa-users option-icon"></i>
+          <div class="option-title">AUA Request</div>
+          <div class="option-description">A request for authentication from an Authentication User Agency (AUA) to the
+            Central Identities Data Repository (CIDR). </div>
+        </div>
+
+        <!-- CIDR Option -->
+        <div class="option-card" id="option3" onclick="selectOption('option3')">
+          <i class="fas fa-database option-icon"></i>
+          <div class="option-title">CIDR Request</div>
+          <div class="option-description">
+            Submit a CIDR (Central Identities Data Repository) request for managing and securing identity data.
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-continue" onclick="proceed()">Continue</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer text-center">
+    <p>&copy; 2025 CSC E-Governance. All rights reserved.</p>
+  </footer>
+
+
+
+  <script src="assests/js/script.js"></script>
+</body>
+
+</html>

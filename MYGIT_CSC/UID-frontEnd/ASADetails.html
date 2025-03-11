@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UID Dashboard</title>
+    <link href='https://fonts.googleapis.com/css?family=Public Sans' rel='stylesheet'>
+    <link rel="stylesheet" href="assests/css/style.css">
+    <link rel="stylesheet" href="assests/css/datatables.min.css">
+    <link href="assests/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assests/img/csc.png" alt="Logo" id="sidebar-logo">
+            <button class="toggle-btn" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div class="menu">
+            <a href="ASA.html" class="active"><i class="fas fa-wallet"></i><span> ASA Dashboard</span></a>
+            <a href="AUA.html"><i class="fas fa-user-shield"></i><span> AUA Dashboard</span></a>
+            <a href="CIDR.html"><i class="fas fa-database"></i><span> CIDR Dashboard</span></a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="content" id="content">
+        <div class="header-wrapper">
+            <button class="btn d-md-none" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <!-- Dropdown Menu -->
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="ASA.html"><i class="fas fa-wallet mx-4"></i><span>ASA
+                            Dashboard</span></a></li>
+                <li><a class="dropdown-item" href="AUA.html"><i class="fas fa-user-shield mx-4"></i><span>AUA
+                            Dashboard</span></a></li>
+                <li><a class="dropdown-item" href="CIDR.html"><i class="fas fa-database mx-4"></i><span>CIDR
+                            Dashboard</span></a></li>
+            </ul>
+            <div class="title">
+                <span id="dashboard-title">ASA Dashboard</span>
+                <img src="assests/img/csc.png" alt="Logo" id="header-logo" class="logo">
+                <span class="client-id-box" id="client-id-display"> Client ID: 120001</span>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="logout-link text-danger">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- Filter Section -->
+        <div class="row mt-4 filter-section">
+            <div class="col-md-4 col-sm-12 mb-sm-3 mb-xs-3">
+                <select class="form-select">
+                    <option>Filter</option>
+                    <option selected>OTP</option>
+                </select>
+            </div>
+
+            <div class="col-md-4 col-sm-12 mb-sm-3 mb-xs-3">
+                <a class="btn login-btn w50 m-0 h-100 text-white" href="select-dashboard.html">Filter</a>
+            </div>
+        </div>
+
+        <!-- Cards Section -->
+        <div class="row filter-section">
+            <div class="col-md-12 mb-sm-3 mb-xs-3">
+                <div class="border p-4 bg-white shadow">
+                    <h5 class="mb-4">Abbreviations:</h5>
+                    <p>
+                        <span class="badge badge-warning">OTP : One-time password</span> <span
+                            class="badge badge-warning">
+                            AUTH : Authentication</span> <span class="badge badge-warning">KYC : Know Your
+                            Customer</span>
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row mb-4 filter-section">
+            <div class="row mb-4 m-0 p-0">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 id="table-heading" class="mb-4">ASA Request Data</h5>
+                        
+                            <table id="example" class="display" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Client ID</th>
+                                        <th>TXN ID</th>
+                                        <th>AUTH MODE</th>
+                                        <th>Creation Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Data will be inserted dynamically here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 CSC E-Governance. All rights reserved.</p>
+    </footer>
+    <script src="assests/js/jquery-3.6.4.min.js"></script>
+    <script src="assests/js/datatables.min.js"></script>
+    <script src="assests/js/bootstrap.bundle.min.js"></script>
+    <script src="assests/js/script.js"></script>
+    
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const clientId = sessionStorage.getItem("clientId") || "CSC-REG";
+        const startDate = sessionStorage.getItem("startDate") || "2024-02-01";
+        const endDate = sessionStorage.getItem("endDate") || "2024-02-25";
+        const urlParams = new URLSearchParams(window.location.search);
+        const type = urlParams.get("type") || "request";
+
+        // Update Client ID dynamically
+        const clientIdElement = document.getElementById("client-id-display");
+        if (clientIdElement) {
+            clientIdElement.textContent = `Client ID: ${clientId}`;
+        }
+
+        const apiUrls = {
+            request: "http://localhost:8086/asa/requests",
+            success: "http://localhost:8086/asa/success",
+            failure: "http://localhost:8086/asa/failure"
+        };
+
+        const headings = {
+            request: "ASA Request Data",
+            success: "ASA Success Data",
+            failure: "ASA Failure Data"
+        };
+
+        // **Update the table heading dynamically**
+        document.getElementById("table-heading").textContent = headings[type] || "ASA Request Data";
+
+        // Define column structure based on `type`
+        function getColumns(type) {
+            if (type === "success") {
+                return [
+                    { data: "sno", title: "S.No", orderable: false },
+                    { data: "clientId", title: "Client ID", defaultContent: "-" },
+                    { data: "txn", title: "TXN ID", defaultContent: "-" },
+                    { data: "authMode", title: "AUTH MODE", defaultContent: "-" },
+                    { data: "responseCode", title: "Response Code", defaultContent: "-" },
+                    { data: "creationDate", title: "Creation Date", render: data => data || "-" }
+                ];
+            } else if (type === "failure") {
+                return [
+                    { data: "sno", title: "S.No", orderable: false },
+                    { data: "clientId", title: "Client ID", defaultContent: "-" },
+                    { data: "txn", title: "TXN ID", defaultContent: "-" },
+                    { data: "authMode", title: "AUTH MODE", defaultContent: "-" },
+                    { data: "errorCode", title: "Error Code", defaultContent: "-" },
+                    { data: "errorMessage", title: "Error Message", defaultContent: "-" },
+                    { data: "creationDate", title: "Creation Date", render: data => data || "-" }
+                ];
+            } else {
+                // Default for "request"
+                return [
+                    { data: "sno", title: "S.No", orderable: false },
+                    { data: "clientId", title: "Client ID", defaultContent: "-" },
+                    { data: "txn", title: "TXN ID", defaultContent: "-" },
+                    { data: "authMode", title: "AUTH MODE", defaultContent: "-" },
+                    { data: "creationDate", title: "Creation Date", render: data => data || "-" }
+                ];
+            }
+        }
+
+        function initializeDataTable() {
+            if ($.fn.DataTable.isDataTable("#example")) {
+                $("#example").DataTable().destroy();
+            }
+
+            $("#example").DataTable({
+                processing: false,
+                serverSide: true,
+                paging: true,
+                searching: false,
+                ordering: false,
+                pageLength: 10,
+                ajax: function (data, callback, settings) {
+                    const page = data.start / data.length;
+                    const size = data.length;
+
+                    $.ajax({
+                        url: apiUrls[type],
+                        type: "GET",
+                        dataType: "json",
+                        data: {
+                            clientId: clientId,
+                            startDate: startDate,
+                            endDate: endDate,
+                            page: page,
+                            size: size
+                        },
+                        success: function (response) {
+                            console.log("API Response:", response);
+                            if (!response || !Array.isArray(response.data)) {
+                                console.error("Invalid response format", response);
+                                callback({ draw: data.draw, recordsTotal: 0, recordsFiltered: 0, data: [] });
+                                return;
+                            }
+
+                            // Adding Serial Number (S.No) to Data
+                            let serialNumber = page * size + 1;
+                            const formattedData = response.data.map((item, index) => {
+                                let rowData = {
+                                    sno: serialNumber + index,
+                                    clientId: item.clientId || "-",
+                                    txn: item.txn || "-",
+                                    authMode: item.authMode || "-",
+                                    creationDate: item.creationDate
+                                        ? new Date(item.creationDate).toLocaleString()
+                                        : "-"
+                                };
+
+                                // Add extra columns for success or failure
+                                if (type === "success") {
+                                    rowData.responseCode = item.code || "-";
+                                } else if (type === "failure") {
+                                    rowData.errorCode = item.errorCode || "-";
+                                    rowData.errorMessage = item.errorMessage || "N/A";
+                                }
+
+                                return rowData;
+                            });
+
+                            callback({
+                                draw: data.draw,
+                                recordsTotal: response.totalItems,
+                                recordsFiltered: response.totalItems,
+                                data: formattedData
+                            });
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("API Error:", status, error);
+                            callback({ draw: data.draw, recordsTotal: 0, recordsFiltered: 0, data: [] });
+                        }
+                    });
+                },
+                columns: getColumns(type) // Set columns dynamically
+            });
+        }
+
+        initializeDataTable();
+    });
+</script>
+
+</body>
+
+</html>
