@@ -1,1 +1,15 @@
+spring:
+  application:
+    name: CIDR  # Service name must match
 
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/csc  # Default MongoDB connection
+
+server:
+  port: 8083  # Default port for CIDR service
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
