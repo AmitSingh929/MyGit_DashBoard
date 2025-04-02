@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: Api-Gateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: asa-service
+          uri: lb://asa
+          predicates:
+            - Path=/asa/**
+        - id: aua-service
+          uri: lb://aua
+          predicates:
+            - Path=/aua/**
+        - id: cidr-service
+          uri: lb://cidr
+          predicates:
+            - Path=/cidr/**
+        - id: eureka
+          uri: lb://eureka
+          predicates:
+            - Path=/eureka/**
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+server:
+  port: 8084
