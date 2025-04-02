@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: service-registry
+
+server:
+  port: 8761  # Define directly, no env variable
+
+eureka:
+  instance:
+    hostname: localhost  # Directly specify without using an env variable
+  client:
+    registerWithEureka: false  # Eureka Server does not register itself
+    fetchRegistry: false  # It doesn’t need to fetch other services
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
