@@ -1,14 +1,15 @@
 spring:
   application:
-    name: AUA
+    name: AUA # Service name must match
+
   data:
     mongodb:
-      uri: ${MONGO_URI:mongodb://localhost:27017/csc}
+      uri: mongodb://localhost:27017/csc  # Default MongoDB connection
 
 server:
-  port: ${SERVER_PORT:8081}
+  port: 8081  # Default port for CIDR service
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka/}
+      defaultZone: http://localhost:8761/eureka/
