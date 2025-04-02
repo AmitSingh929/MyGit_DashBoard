@@ -1,1 +1,14 @@
+spring:
+  application:
+    name: ASA
+  data:
+    mongodb:
+      uri: ${MONGO_URI:mongodb://localhost:27017/csc}
 
+server:
+  port: ${SERVER_PORT:8082}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka/}
