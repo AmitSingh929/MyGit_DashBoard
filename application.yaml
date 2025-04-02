@@ -6,3 +6,5 @@ eureka:
   client:
     serviceUrl:
       defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka/}
+
+SERVER_PORT11: 8089
