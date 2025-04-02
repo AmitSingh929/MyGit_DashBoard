@@ -12,7 +12,7 @@ spring:
         - id: aua-service
           uri: lb://aua
           predicates:
-            - Path=/aua/**
+            - Path=/ama/**
         - id: cidr-service
           uri: lb://cidr
           predicates:
