@@ -1,10 +1,14 @@
-spring:
-  application:
-    name: Config-Default
-    
+server:
+  port: 0  # Let Spring Boot assign a random port
+
 eureka:
   client:
     serviceUrl:
-      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka/}
+      defaultZone: http://localhost:8761/eureka/  # Default Eureka Server
 
-SERVER_PORT11: 8089
+spring:
+  cloud:
+    config:
+      allow-override: true
+      override-none: false
+      override-system-properties: false
